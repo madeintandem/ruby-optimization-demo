@@ -10,7 +10,34 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_11_09_162100) do
+ActiveRecord::Schema[7.0].define(version: 2023_11_09_165425) do
+  create_table "combat_rating_params", force: :cascade do |t|
+    t.string "star_destroyer_version"
+    t.integer "tie_squadrons"
+    t.integer "turbolasers"
+    t.integer "ion_cannons"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "interdiction_rating_params", force: :cascade do |t|
+    t.string "star_destroyer_version"
+    t.integer "gravity_engines"
+    t.float "max_mass_shadow"
+    t.float "power_drain"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "jump_rating_params", force: :cascade do |t|
+    t.string "star_destroyer_version"
+    t.float "motivator_power"
+    t.float "cronau_factor"
+    t.float "mass_shadow"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "star_destroyers", force: :cascade do |t|
     t.string "name"
     t.string "version"

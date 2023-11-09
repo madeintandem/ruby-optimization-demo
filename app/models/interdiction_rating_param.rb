@@ -1,0 +1,2 @@
+class InterdictionRatingParam < ApplicationRecord
+end
