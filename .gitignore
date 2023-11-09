@@ -36,3 +36,6 @@
 
 # Ignore local gems
 /vendor/ruby
+
+# Ignore JetBrains IDE files
+/.idea
