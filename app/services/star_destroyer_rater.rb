@@ -9,6 +9,8 @@ class StarDestroyerRater
     rate_combat(star_destroyer)
     rate_interdiction(star_destroyer)
     rate_jump(star_destroyer)
+
+    star_destroyer.save
   end
 
   private
@@ -55,7 +57,7 @@ class StarDestroyerRater
       result *= Math::sinh(rating_params[:tie_squadrons] ** 3)
     end
 
-    star_destroyer.update(combat_rating: result)
+    star_destroyer.combat_rating = result
   end
 
   def rate_interdiction(star_destroyer)
@@ -67,7 +69,7 @@ class StarDestroyerRater
       result *= Math::sinh(rating_params[:max_mass_shadow]) ** Math::exp(rating_params[:power_drain])
     end
 
-    star_destroyer.update(interdiction_rating: result)
+    star_destroyer.interdiction_rating = result
   end
 
   def rate_jump(star_destroyer)
@@ -82,6 +84,6 @@ class StarDestroyerRater
       result *= Math::log2(rating_params[:cronau_factor]) * Math::log10(rating_params[:mass_shadow])
     end
 
-    star_destroyer.update(jump_rating: result)
+    star_destroyer.jump_rating = result
   end
 end
