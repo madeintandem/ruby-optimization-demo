@@ -10,38 +10,38 @@ class StarDestroyerRater
   private
 
   def rate_combat(star_destroyer)
-    @result = 0.0
+    result = 0.0
 
     29.times do
-      @result += Math::tanh(star_destroyer.combat_rating_params.turbolasers * star_destroyer.combat_rating_params.ion_cannons)
+      result += Math::tanh(star_destroyer.combat_rating_params.turbolasers * star_destroyer.combat_rating_params.ion_cannons)
     end
     9.times do
-      @result *= Math::sinh(star_destroyer.combat_rating_params.tie_squadrons ** 3)
+      result *= Math::sinh(star_destroyer.combat_rating_params.tie_squadrons ** 3)
     end
 
-    @result
+    star_destroyer.update(combat_rating: result)
   end
 
   def rate_interdiction(star_destroyer)
-    @result = 0
+    result = 0
 
     (star_destroyer.interdiction_rating_params.gravity_engines ** 3).times do
-      @result *= Math::sinh(star_destroyer.interdiction_rating_params.max_mass_shadow) ** Math::exp(star_destroyer.interdiction_rating_params.power_drain)
+      result *= Math::sinh(star_destroyer.interdiction_rating_params.max_mass_shadow) ** Math::exp(star_destroyer.interdiction_rating_params.power_drain)
     end
 
-    @result
+    star_destroyer.update(interdiction_rating: result)
   end
 
   def rate_jump(star_destroyer)
-    @result = 0
+    result = 0
 
     23.times do
-      @result += Math::hypot(star_destroyer.jump_rating_params.motivator_power, 1138.0)
+      result += Math::hypot(star_destroyer.jump_rating_params.motivator_power, 1138.0)
     end
     31.times do
-      @result *= Math::log2(star_destroyer.jump_rating_params.cronau_factor) * Math::log10(star_destroyer.jump_rating_params.mass_shadow)
+      result *= Math::log2(star_destroyer.jump_rating_params.cronau_factor) * Math::log10(star_destroyer.jump_rating_params.mass_shadow)
     end
 
-    @result
+    star_destroyer.update(jump_rating: result)
   end
 end
